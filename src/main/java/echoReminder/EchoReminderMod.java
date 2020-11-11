@@ -1,4 +1,4 @@
-package theDefault;
+package echoReminder;
 
 import basemod.BaseMod;
 import basemod.ModLabeledToggleButton;
@@ -15,8 +15,8 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import theDefault.util.IDCheckDontTouchPls;
-import theDefault.util.TextureLoader;
+import echoReminder.util.IDCheckDontTouchPls;
+import echoReminder.util.TextureLoader;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,11 +24,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 @SpireInitializer
-public class DefaultMod implements
-        EditStringsSubscriber,
+public class EchoReminderMod implements
         PostInitializeSubscriber {
     
-    public static final Logger logger = LogManager.getLogger(DefaultMod.class.getName());
+    public static final Logger logger = LogManager.getLogger(EchoReminderMod.class.getName());
     private static String modID;
     
     public static Properties theDefaultDefaultSettings = new Properties();
@@ -40,14 +39,8 @@ public class DefaultMod implements
     private static final String DESCRIPTION = "You have Echo Form! It came free with your Creative AI!";
 
     public static final String BADGE_IMAGE = "echoFormReminderResources/images/Badge.png";
-
     
-    public static String makeOrbPath(String resourcePath) {
-        return getModID() + "Resources/orbs/" + resourcePath;
-    }
-
-    
-    public DefaultMod() {
+    public EchoReminderMod() {
         logger.info("Subscribe to BaseMod hooks");
         BaseMod.subscribe(this);
         
@@ -71,7 +64,7 @@ public class DefaultMod implements
     public static void setModID(String ID) {
         Gson coolG = new Gson();
         
-        InputStream in = DefaultMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json");
+        InputStream in = EchoReminderMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json");
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class);
         logger.info("You are attempting to set your mod ID as: " + ID);
         if (ID.equals(EXCEPTION_STRINGS.DEFAULTID)) {
@@ -83,17 +76,17 @@ public class DefaultMod implements
         }
         logger.info("Success! ID is " + modID);
     }
-    
+
     public static String getModID() {
         return modID;
     }
-    
+
     private static void pathCheck() {
         Gson coolG = new Gson();
-        
-        InputStream in = DefaultMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json");
+
+        InputStream in = EchoReminderMod.class.getResourceAsStream("/IDCheckStringsDONT-EDIT-AT-ALL.json");
         IDCheckDontTouchPls EXCEPTION_STRINGS = coolG.fromJson(new InputStreamReader(in, StandardCharsets.UTF_8), IDCheckDontTouchPls.class);
-        String packageName = DefaultMod.class.getPackage().getName();
+        String packageName = EchoReminderMod.class.getPackage().getName();
         FileHandle resourcePathExists = Gdx.files.internal(getModID() + "Resources");
         if (!modID.equals(EXCEPTION_STRINGS.DEVID)) {
             if (!packageName.equals(getModID())) {
@@ -107,9 +100,7 @@ public class DefaultMod implements
     
     @SuppressWarnings("unused")
     public static void initialize() {
-        logger.info("========================= Initializing Default Mod. Hi. =========================");
-        DefaultMod defaultmod = new DefaultMod();
-        logger.info("========================= /Default Mod Initialized. Hello World./ =========================");
+        EchoReminderMod EchoReminderMod = new EchoReminderMod();
     }
     
     @Override
@@ -134,7 +125,7 @@ public class DefaultMod implements
                     enablePlaceholder = button.enabled;
                     try {
                         
-                        SpireConfig config = new SpireConfig("defaultMod", "theDefaultConfig", theDefaultDefaultSettings);
+                        SpireConfig config = new SpireConfig("echoReminderMod", "theDefaultConfig", theDefaultDefaultSettings);
                         config.setBool(ENABLE_PLACEHOLDER_SETTINGS, enablePlaceholder);
                         config.save();
                     } catch (Exception e) {
@@ -151,47 +142,13 @@ public class DefaultMod implements
         logger.info("Done loading badge Image and mod options");
     }
 
-    
 
-    
 
-    
-    @Override
-    public void receiveEditStrings() {
-        logger.info("You seeing this?");
-        logger.info("Beginning to edit strings for mod with ID: " + getModID());
-        
-        
-        BaseMod.loadCustomStringsFile(CardStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Card-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(PowerStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Power-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(RelicStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Relic-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(EventStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Event-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(PotionStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Potion-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(CharacterStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Character-Strings.json");
-        
-        
-        BaseMod.loadCustomStringsFile(OrbStrings.class,
-                getModID() + "Resources/localization/eng/DefaultMod-Orb-Strings.json");
-        
-        logger.info("Done edittting strings");
-    }
-    
+
+
+
+
+
     public static String makeID(String idText) {
         return getModID() + ":" + idText;
     }
