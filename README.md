@@ -1,7 +1,5 @@
-# Default Mod Base - Quick Start
+# Echo Form Reminder
 
-This is a cloneable branch of the Default with all comments removed.
+You have Echo Form!
 
-You can use this to quickly start up a brand new mod.
-
-I assume you know what you are doing.
+A small mod to add a visual indicator when you have Echo Form, for the forgetful among us.
