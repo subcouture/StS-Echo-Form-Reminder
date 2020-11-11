@@ -64,7 +64,8 @@ public class DefaultMod implements
         } catch (Exception e) {
             e.printStackTrace();
         }
-        logger.info("Done adding mod settings");
+        logger.info("Done adding mod settings" +
+                "Creds Jedi515 for lending me his render code, Vex for being very nice, Grem for providing such a lovely quickstart mod, Kio for being my lord and saviour, everyone else on the StS modding discord!");
     }
     
     public static void setModID(String ID) {
